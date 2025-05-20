@@ -12,7 +12,7 @@ import OrgaCreate from "@/components/organization/OrgaCreate";
 import { useProfessional } from "@/hooks/useProfessional";
 import ProjectCreate from "@/components/project/ProjectCreate";
 import { getOrganizations, Organization } from "@/utils/getOrganizations";
-import DysplayPath from "@/components/layout/DysplayPath";
+import DysplayPath from "@/components/layout/DisplayPath";
 
 export default function DashboardPage() {
   const { data: session, isPending } = useSession();

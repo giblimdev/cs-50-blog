@@ -3,7 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import DysplayPath from "@/components/layout/DysplayPath";
+import DysplayPath from "@/components/layout/DisplayPath";
 
 const FeatureSection = ({
   title,

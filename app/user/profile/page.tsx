@@ -1,4 +1,4 @@
-import DysplayPath from "@/components/layout/DysplayPath";
+import DysplayPath from "@/components/layout/DisplayPath";
 import PersoProfile from "@/components/profile/PersoProfile";
 import ProProfile from "@/components/profile/ProProfile";
 import UserProfile from "@/components/profile/UserProfile";

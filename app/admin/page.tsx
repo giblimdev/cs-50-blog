@@ -1,6 +1,6 @@
 import React from "react";
 import { CheckCircle2 } from "lucide-react";
-import DysplayPath from "@/components/layout/DysplayPath";
+import DysplayPath from "@/components/layout/DisplayPath";
 
 export default function AdminPage() {
   return (

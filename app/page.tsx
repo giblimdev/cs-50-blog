@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Rocket, Shield, Layout } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import DysplayPath from "@/components/layout/DysplayPath";
+import DysplayPath from "@/components/layout/DisplayPath";
 
 export default function Home() {
   const features = [
