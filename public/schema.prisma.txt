@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  READER
+  AUTHOR
+  DEV
+  ADMIN
+}
+
+model User {
+  id            String   @id @default(uuid())
+  name          String?
+  email         String?  @unique
+  emailVerified Boolean  @default(false)
+  image         String?
+  role          Role     @default(USER)
+  lang          String?  @default("en")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  sessions      Session[]
+  accounts      Account[]
+  verifications Verification[]
+  profile       Profile?
+  profileId     String?
+
+  @@index([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(uuid())
+  userId                String
+  accountId             String
+  providerId            String
+  accessToken           String?
+  refreshToken          String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  idToken               String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id @default(uuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@map("verification")
+}
+
+model Profile {
+  id                String    @id @default(uuid())
+  firstName         String
+  lastName          String
+  dateOfBirth       DateTime?
+  languagePreferred String    @default("en")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  userId      String       @unique
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profilePros ProfilePro[]
+
+  @@map("profiles")
+}
+
+model ProfilePro {
+  id        String   @id @default(uuid())
+  profileId String
+  updatedAt DateTime @updatedAt
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  // M:N avec Organization (membre de plusieurs organisations)
+  organizations Organization[] @relation("OrganizationMembers")
+
+  // Un pro peut être owner de plusieurs orgs
+  organizationsOwned Organization[] @relation("OrganizationOwner")
+
+  projects Project[] @relation("ProjectMembers")
+
+  @@map("profile_pros")
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // M:N membres
+  profilePros ProfilePro[] @relation("OrganizationMembers")
+
+  // owner unique
+  owner ProfilePro @relation("OrganizationOwner", fields: [ownerId], references: [id])
+
+  projects Project[]
+
+  @@map("organizations")
+}
+
+model Project {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  image       String?
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id])
+
+  members ProfilePro[] @relation("ProjectMembers")
+
+  @@index([name])
+  @@map("projects")
+}
