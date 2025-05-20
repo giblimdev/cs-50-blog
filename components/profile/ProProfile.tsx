@@ -198,7 +198,7 @@ export default function ProProfile() {
       <div className="mt-4">
         <Button
           onClick={() => {}}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-sm"
+          className="w-full bg-white hover:bg-white text-sm"
           disabled
         >
           <Edit className="mr-2 h-3 w-3" />

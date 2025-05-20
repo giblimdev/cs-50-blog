@@ -1,3 +1,4 @@
+import DysplayPath from "@/components/layout/DysplayPath";
 import PersoProfile from "@/components/profile/PersoProfile";
 import ProProfile from "@/components/profile/ProProfile";
 import UserProfile from "@/components/profile/UserProfile";
@@ -21,8 +22,8 @@ const profiles = [
 function Page() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Mes Profils</h1>
-
+      <DysplayPath />{" "}
+      <h1 className="text-3xl font-bold text-center mb-8">My Profiles</h1>
       {/* Grid layout pour les vignettes */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {profiles.map(({ title, component }, index) => (

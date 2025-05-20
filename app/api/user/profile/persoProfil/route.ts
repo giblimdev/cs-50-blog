@@ -9,7 +9,14 @@ import { z } from "zod";
 const profileSchema = z.object({
   firstName: z.string().max(100).optional().default(""),
   lastName: z.string().max(100).optional().default(""),
-  dateOfBirth: z.string().datetime().optional().nullable(),
+  dateOfBirth: z
+    .union([
+      z.string().refine((val) => !val || !isNaN(Date.parse(val)), {
+        message: "Invalid date format",
+      }),
+      z.null(),
+    ])
+    .optional(),
   languagePreferred: z.string().min(2).max(5).default("en"),
 });
 

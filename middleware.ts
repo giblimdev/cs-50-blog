@@ -21,4 +21,4 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/user/:path*", "/admin/:path*", "/dev/:path*"],
 };
-/* get session retourne t il role ?*/
+/*dans mon application next utilisant betterAuth get session cooky retourne t il role ?*/

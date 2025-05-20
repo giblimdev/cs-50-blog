@@ -9,16 +9,16 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { z } from "zod";
 
-// Schéma de validation (correspond à createOrganizationSchema de l'API)
+// Validation schema (corresponds to createOrganizationSchema from the API)
 const formSchema = z.object({
-  name: z.string().min(1, "Le nom est requis").max(100, "Le nom est trop long"),
+  name: z.string().min(1, "Name is required").max(100, "Name is too long"),
   slug: z
     .string()
-    .min(1, "Le slug est requis")
-    .max(50, "Le slug est trop long")
+    .min(1, "Slug is required")
+    .max(50, "Slug is too long")
     .regex(
       /^[a-z0-9-]+$/,
-      "Le slug doit être en minuscules, alphanumérique ou contenir des tirets"
+      "Slug must be lowercase, alphanumeric, or contain hyphens"
     ),
 });
 
@@ -43,7 +43,7 @@ export default function OrgaCreate({
     {}
   );
 
-  // Gestion du changement des champs avec formatage automatique du slug
+  // Handles field changes with automatic slug formatting
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const newValue =
@@ -55,7 +55,7 @@ export default function OrgaCreate({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validation côté client
+    // Client-side validation
     const result = formSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors = result.error.flatten().fieldErrors;
@@ -63,12 +63,12 @@ export default function OrgaCreate({
         name: fieldErrors.name?.[0],
         slug: fieldErrors.slug?.[0],
       });
-      toast.error("Veuillez corriger les erreurs dans le formulaire.");
+      toast.error("Please correct the errors in the form.");
       return;
     }
 
     if (!profileProId) {
-      toast.error("Profil professionnel requis pour créer une organisation.");
+      toast.error("Professional profile required to create an organization.");
       return;
     }
 
@@ -85,16 +85,16 @@ export default function OrgaCreate({
       });
 
       if (response.ok) {
-        toast.success("Organisation créée avec succès !");
-        setFormData({ name: "", slug: "" }); // Réinitialiser le formulaire
+        toast.success("Organization created successfully!");
+        setFormData({ name: "", slug: "" }); // Reset the form
         onSuccess();
         onClose();
       } else {
         const errorData = await response.json();
         const errorMessage =
-          errorData.message || "Erreur lors de la création de l'organisation.";
+          errorData.message || "Error creating the organization.";
         if (errorData.errors) {
-          // Gérer les erreurs de validation Zod de l'API
+          // Handle Zod validation errors from the API
           const fieldErrors = errorData.errors.reduce(
             (
               acc: Record<string, string>,
@@ -107,29 +107,29 @@ export default function OrgaCreate({
           );
           setErrors(fieldErrors);
         } else if (response.status === 409) {
-          setErrors({ slug: "Ce slug est déjà utilisé." });
+          setErrors({ slug: "This slug is already in use." });
         }
         toast.error(errorMessage);
       }
     } catch (error) {
-      console.error("Erreur réseau ou inattendue:", error);
-      toast.error("Erreur réseau. Veuillez réessayer.");
+      console.error("Network or unexpected error:", error);
+      toast.error("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Gérer l'état de chargement si useProfessional est asynchrone
+  // Handle loading state if useProfessional is asynchronous
   if (!userId && !profileProId && !isSubmitting) {
-    return <div className="text-center p-6">Chargement du profil...</div>;
+    return <div className="text-center p-6">Loading profile...</div>;
   }
 
   return (
     <div className="max-w-md mx-auto p-6">
-      {/* Afficher les IDs uniquement en développement */}
+      {/* Display IDs only in development */}
       {process.env.NODE_ENV === "development" && (
         <p className="text-gray-700 mb-4">
-          Utilisateur: {userId || "N/A"} | Profil Pro: {profileProId || "N/A"}
+          User: {userId || "N/A"} | Pro Profile: {profileProId || "N/A"}
         </p>
       )}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -138,14 +138,14 @@ export default function OrgaCreate({
             htmlFor="name"
             className="block text-sm font-medium text-gray-700"
           >
-            Nom
+            Name
           </label>
           <Input
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Nom de l'organisation"
+            placeholder="Organization Name"
             required
             disabled={isSubmitting}
             aria-invalid={!!errors.name}
@@ -169,7 +169,7 @@ export default function OrgaCreate({
             name="slug"
             value={formData.slug}
             onChange={handleChange}
-            placeholder="nom-org"
+            placeholder="organization-name"
             required
             disabled={isSubmitting}
             aria-invalid={!!errors.slug}
@@ -190,7 +190,7 @@ export default function OrgaCreate({
             {isSubmitting ? (
               <Loader2 className="animate-spin h-5 w-5" />
             ) : (
-              "Créer"
+              "Create"
             )}
           </Button>
           <Button
@@ -200,7 +200,7 @@ export default function OrgaCreate({
             onClick={onClose}
             disabled={isSubmitting}
           >
-            Annuler
+            Cancel
           </Button>
         </div>
       </form>

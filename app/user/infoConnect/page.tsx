@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSession } from "@/lib/auth/auth-client";
-import { Loader2 } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -238,7 +238,7 @@ export default function InfoConnect() {
   }
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100">
+    <div className="flex h-screen items-center justify-center bg-gradient-to-br from-indigo-600 via-teal-500 to-coral-500">
       <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
           Welcome, {session.user?.name?.trim() || "User"}!
@@ -247,7 +247,10 @@ export default function InfoConnect() {
           {profileStatus || "Setting up your profile..."}
         </p>
         <Link href="/">
-          <Button className="w-full">Continue</Button>
+          <Button className="w-full bg-indigo-600 text-white text-lg font-semibold py-3 rounded-lg hover:bg-indigo-700 hover:scale-105 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+            <ArrowRight className="w-5 h-5" />
+            Continue
+          </Button>
         </Link>
       </div>
     </div>

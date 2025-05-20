@@ -174,7 +174,7 @@ export default function SignIn() {
       <Card className=" rounded-lg rounded-t-none max-w-md w-full pt-0 pb-4">
         {" "}
         {/* Added w-full for responsiveness */}
-        <CardHeader className="p-2 bg-gradient-to-r from-pink-400 to-blue-500 text-white rounded-t-md">
+        <CardHeader className="p-2 bg-gradient-to-br from-indigo-600 via-teal-500 to-coral-500 text-white rounded-t-md">
           <CardTitle className="text-lg md:text-xl">Sign In</CardTitle>
           <CardDescription className="text-xs md:text-sm  text-white/90">
             Enter your email and password below to login or use your social

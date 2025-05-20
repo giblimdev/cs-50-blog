@@ -1,8 +1,9 @@
-// @/app/features/page.tsx
 "use client";
 
 import Link from "next/link";
 import React from "react";
+import { ArrowRight } from "lucide-react";
+import DysplayPath from "@/components/layout/DysplayPath";
 
 const FeatureSection = ({
   title,
@@ -13,32 +14,34 @@ const FeatureSection = ({
   description: string;
   icon: React.ReactNode;
 }) => (
-  <div className="feature-card bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all">
-    <div className="flex items-center mb-4">
-      <div className="bg-blue-100 dark:bg-blue-900 p-3 rounded-full mr-4">
+  <div className="feature-card bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-2xl shadow-xl p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-indigo-200/50">
+    <div className="flex items-center mb-6">
+      <div className="bg-indigo-100 dark:bg-indigo-900/50 p-4 rounded-full mr-4">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+      <h3 className="text-2xl font-extrabold text-indigo-900 dark:text-indigo-100">
         {title}
       </h3>
     </div>
-    <p className="text-gray-600 dark:text-gray-300">{description}</p>
+    <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+      {description}
+    </p>
   </div>
 );
 
 export default function FeaturesPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-16 bg-gradient-to-br from-indigo-50 via-teal-50 to-coral-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <DysplayPath />{" "}
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-5xl font-extrabold text-indigo-900 dark:text-indigo-100 tracking-tight mb-4 animate-in fade-in zoom-in-95">
           Star-One Features
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
           A complete agile project management platform to optimize your workflow
           and improve your team&apos;s collaboration.
         </p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <FeatureSection
           title="Agile Project Management"
@@ -46,7 +49,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-coral-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -67,7 +70,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-teal-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -88,7 +91,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-indigo-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -109,7 +112,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-coral-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -130,7 +133,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-teal-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -151,7 +154,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-indigo-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -172,7 +175,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-coral-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -193,7 +196,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-teal-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -214,7 +217,7 @@ export default function FeaturesPage() {
           icon={
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-blue-600"
+              className="h-8 w-8 text-indigo-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -229,14 +232,15 @@ export default function FeaturesPage() {
           }
         />
       </div>
-
       <div className="mt-16 text-center">
-        <Link href={"public/newProject"}></Link> {/* Keep link path as is */}
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">
-          Start a project now
-        </button>
-        <p className="mt-4 text-gray-500 dark:text-gray-400">
-          Discover how Star-One can transform the way you manage your projects
+        <Link href="public/newProject">
+          <button className="bg-gradient-to-r from-indigo-600 to-teal-600 text-white text-lg font-semibold py-3 px-8 rounded-lg hover:from-indigo-700 hover:to-teal-700 hover:scale-105 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 mx-auto">
+            <ArrowRight className="w-5 h-5" />
+            Start a Project Now
+          </button>
+        </Link>
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Discover how Star-One can transform the way you manage your projects.
         </p>
       </div>
     </div>

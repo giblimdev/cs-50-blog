@@ -12,6 +12,7 @@ import OrgaCreate from "@/components/organization/OrgaCreate";
 import { useProfessional } from "@/hooks/useProfessional";
 import ProjectCreate from "@/components/project/ProjectCreate";
 import { getOrganizations, Organization } from "@/utils/getOrganizations";
+import DysplayPath from "@/components/layout/DysplayPath";
 
 export default function DashboardPage() {
   const { data: session, isPending } = useSession();
@@ -95,6 +96,7 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
+      <DysplayPath />
       <h1 className="text-3xl font-bold text-gray-900">
         Welcome, {session.user?.name?.trim() || "User"}!
       </h1>

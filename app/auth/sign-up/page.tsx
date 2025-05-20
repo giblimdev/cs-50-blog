@@ -85,7 +85,7 @@ export default function SignUp() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
       <Card className=" rounded-md rounded-t-none max-w-md w-full p-0 pb-4">
-        <CardHeader className="p-3 bg-gradient-to-r from-pink-400 to-blue-500 text-white rounded-t-md">
+        <CardHeader className="p-3 bg-gradient-to-br from-indigo-600 via-teal-500 to-coral-500 text-white rounded-t-md">
           <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
           <CardDescription className="text-xs md:text-sm text-white/90">
             Enter your information to create an account
